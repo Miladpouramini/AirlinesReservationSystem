@@ -20,7 +20,7 @@ public class User {
         number = scanner.nextInt();
         switch (number){
             case 1 :
-                //ch
+                changePassword();
             case 2 :
                 //
             case 3 :
@@ -36,6 +36,20 @@ public class User {
         }
     }
     public static void changePassword(){
-        
+        while(true) {
+            System.out.print("New password-->");
+            String newPassword = scanner.next();
+            System.out.print("Confirm new password-->");
+            String cNewPassword = scanner.next();
+            if (newPassword == cNewPassword){
+                FirstMeno.password[FirstMeno.userNumber] = newPassword;
+                System.out.println("The password was changed!");
+            }
+            else {
+                System.out.println("Try again...!");
+                continue;
+            }
+            break;
+        }
     }
 }
