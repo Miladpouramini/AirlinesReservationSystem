@@ -8,6 +8,9 @@ public class FirstMeno {
     static int counter = 0;
     static Scanner scanner = new Scanner(System.in);
     static int userNumber;
+
+    //----------------------------------------------------------------------------------------------------------------//
+    //تابع چاپ منوی اولیه
     public static void printFirstMeno() {
         System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n" +
                 "           WELCOME TO AI RELINE RESERVATION SYSTEM\n" +
@@ -17,6 +20,8 @@ public class FirstMeno {
                 "    <1> Sign in\n" +
                 "    <2> Sign up");
     }
+    //----------------------------------------------------------------------------------------------------------------//
+    //تابع انتخاب کاربر بین ثبت نام و ورود
     public static void gettingFirstNumber(){
         while(true) {
             printFirstMeno();
@@ -29,6 +34,8 @@ public class FirstMeno {
             }
         }
     }
+    //----------------------------------------------------------------------------------------------------------------//
+    //تابع ثبت نام
     public static void signUp(){
         boolean check;
         while(true) {
@@ -47,6 +54,8 @@ public class FirstMeno {
             break;
         }
     }
+    //----------------------------------------------------------------------------------------------------------------//
+    //تابع بررسی نام کاربری تکراری
     public static boolean checkUser()
     {
         boolean count=true;
@@ -60,6 +69,8 @@ public class FirstMeno {
         }
         return count;
     }
+    //----------------------------------------------------------------------------------------------------------------//
+    //تابع ورود
     public static void signIn(){
         String check="Admin";
         while (true) {
@@ -70,7 +81,7 @@ public class FirstMeno {
             if (checkSignIn(us,ps)) {
                 UserOptions.UserMeno();
             } else if (us.equals("Admin") && ps.equals("Admin") || us.equals("admin") && ps.equals("admin")) {
-                System.out.println("Admin");
+                Admin.adminOptions();
                 break;
             } else {
                 System.out.println("Try again...!");
@@ -78,6 +89,8 @@ public class FirstMeno {
             }
         }
     }
+    //----------------------------------------------------------------------------------------------------------------//
+    //تابع بررسی نام کابری و رمز
     public static boolean checkSignIn(String us,String ps){
         boolean count=false;
         for (int i=0;i<10;i++){

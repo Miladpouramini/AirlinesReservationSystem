@@ -3,15 +3,10 @@ import java.util.Scanner;
 public class UserOptions {
     static Scanner scanner = new Scanner(System.in);
     static long charge[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    //static String available_Origins[] = {"Yazd","Mashhad","Shiraz"};
     static String user_Origin[] = {"none", "none", "none", "none", "none", "none", "none", "none", "none", "none"};
-    //static String available_Destination[] = {"Tehran","Ahvaz","Tabriz"};
     static String user_Destination[] = {"none", "none", "none", "none", "none", "none", "none", "none", "none", "none"};
-    //static String available_Date[] = {"1401-12-10","1401-12-11","1401-12-12"};
     static String user_Date[] = {"none", "none", "none", "none", "none", "none", "none", "none", "none", "none"};
-    //static String available_Time[] = {"12:30","08:00","22:30"};
     static String user_Time[] = {"none", "none", "none", "none", "none", "none", "none", "none", "none", "none"};
-    //static long available_Price[] = {700_000,900_000,1_100_000};
     static long user_Price[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     static int available_Seats[] = {51, 245, 12};
     static int user_Seats[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -19,6 +14,8 @@ public class UserOptions {
     static String[][] user_Tickets = new String[3][5];
     static int[] number_Tickets = {0,0,0,0,0,0,0,0,0,0};
 
+    //----------------------------------------------------------------------------------------------------------------//
+    //چاپ منوی کاربر
     public static void printUserMeno() {
         System.out.print("::::::::::::::::::::::::::::::::::::::::\n" +
                 "         PASSENGER MENU OPTIONS\n" +
@@ -33,7 +30,8 @@ public class UserOptions {
                 "    <0> Sign out\n" +
                 "-->");
     }
-
+    //----------------------------------------------------------------------------------------------------------------//
+    //منوی کاربر
     public static void UserMeno() {
         int number;
         while (true) {
@@ -53,7 +51,8 @@ public class UserOptions {
                     break;
                 }
                 case 4:
-                    //
+                    ticketCancelation();
+                    break;
                 case 5: {
                     boockedTickets();
                     break;
@@ -64,11 +63,14 @@ public class UserOptions {
                 }
                 case 0:
                     FirstMeno.gettingFirstNumber();
+                default:
+                    break;
             }
             continue;
         }
     }
-
+    //----------------------------------------------------------------------------------------------------------------//
+    //تابع عوض کردن رمز کاربر
     public static void changePassword() {
         while (true) {
             System.out.print("New password-->");
@@ -85,14 +87,16 @@ public class UserOptions {
             break;
         }
     }
-
+    //----------------------------------------------------------------------------------------------------------------//
+    //تابع افزایش شارژ
     public static void addCharge() {
         System.out.println("Your charge:" + charge[FirstMeno.userNumber]);
         System.out.print("Enter the desired amount for charging-->");
         charge[FirstMeno.userNumber] += scanner.nextLong();
         System.out.println("charged!" + '\n' + "your charge:" + charge[FirstMeno.userNumber]);
     }
-
+    //----------------------------------------------------------------------------------------------------------------//
+    //تابع خرید بلیط
     public static void bookingTicket() {
         int number;
         while (true) {
@@ -165,18 +169,31 @@ public class UserOptions {
                     continue;
                 }
             }
-        }
-    }
-    public static void boockedTickets(){
-        for (int i = 0; i < number_Tickets[FirstMeno.userNumber]; i++) {
-            for (int j = 0; j < 5; j++) {
-                System.out.print(user_Tickets[i][j]+'\t');
+            else {
+                System.out.println("Try again...!");
+                break;
             }
-            System.out.println('\n');
-            if (i-1 < number_Tickets[FirstMeno.userNumber])
-                System.out.print(".................................................................\n");
         }
     }
+    //----------------------------------------------------------------------------------------------------------------//
+    //تابع نمایش بلیط های خریداری شده
+    public static void boockedTickets(){
+        if (number_Tickets[FirstMeno.userNumber] > 0) {
+            for (int i = 0; i < number_Tickets[FirstMeno.userNumber]; i++) {
+                for (int j = 0; j < 5; j++) {
+                    System.out.print(i+1 + ")");
+                    System.out.print(user_Tickets[i][j] + '\t');
+                }
+                System.out.println('\n');
+                if (i - 1 < number_Tickets[FirstMeno.userNumber])
+                    System.out.print(".................................................................\n");
+            }
+        }
+        else
+            System.out.println("No ticket has been reserved!");
+    }
+    //----------------------------------------------------------------------------------------------------------------//
+    //تابع ذخیره کردن بلیط های هر کاربر
     public static void saveTickets(){
                 user_Tickets[number_Tickets[FirstMeno.userNumber]][0] = user_FlightId[FirstMeno.userNumber];
                 user_Tickets[number_Tickets[FirstMeno.userNumber]][1] = user_Origin[FirstMeno.userNumber];
@@ -184,6 +201,8 @@ public class UserOptions {
                 user_Tickets[number_Tickets[FirstMeno.userNumber]][3] = user_Date[FirstMeno.userNumber];
                 user_Tickets[number_Tickets[FirstMeno.userNumber]][4] = user_Time[FirstMeno.userNumber];
     }
+    //----------------------------------------------------------------------------------------------------------------//
+    //تابع جست و جوی بلیط
     public static void search_Flight_Tickets(){
         System.out.print("Your FlightId-->");
         String letter = scanner.next();
@@ -203,5 +222,37 @@ public class UserOptions {
         else
             System.out.println("No tickets have been booked!");
 
+    }
+    //----------------------------------------------------------------------------------------------------------------//
+    //تابع لغو کردن بلیط
+    public static void ticketCancelation() {
+        if (number_Tickets[FirstMeno.userNumber] > 0) {
+            boockedTickets();
+            System.out.print("Enter the desired ticket number-->");
+            int numberical = scanner.nextInt();
+            if (numberical == 1) {
+                for (int i = 0; i < 5; i++) {
+                    user_Tickets[0][i] = "";
+                }
+                charge[FirstMeno.userNumber] += 700_000;
+                available_Seats[0] += 1;
+            }
+            if (numberical == 2) {
+                for (int i = 0; i < 5; i++) {
+                    user_Tickets[1][i] = "";
+                }
+                charge[FirstMeno.userNumber] += 900_000;
+                available_Seats[1] += 1;
+            }
+            if (numberical == 3) {
+                for (int i = 0; i < 5; i++) {
+                    user_Tickets[2][i] = "";
+                }
+                charge[FirstMeno.userNumber] += 1_100_000;
+                available_Seats[2] += 1;
+            }
+        }
+        else
+            System.out.println("No ticket has been reserved!");
     }
 }
