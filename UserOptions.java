@@ -180,8 +180,8 @@ public class UserOptions {
     public static void boockedTickets(){
         if (number_Tickets[FirstMenu.userNumber] > 0) {
             for (int i = 0; i < number_Tickets[FirstMenu.userNumber]; i++) {
+                System.out.print(i+1 + ")");
                 for (int j = 0; j < 5; j++) {
-                    System.out.print(i+1 + ")");
                     System.out.print(user_Tickets[i][j] + '\t');
                 }
                 System.out.println('\n');
