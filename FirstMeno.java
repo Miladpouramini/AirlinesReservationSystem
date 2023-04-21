@@ -18,14 +18,15 @@ public class FirstMeno {
                 "    <2> Sign up");
     }
     public static void gettingFirstNumber(){
-        printFirstMeno();
-        System.out.print("-->");
-        int number = scanner.nextInt();
-        if (number == 1){
-            signIn();
-        }
-        else if (number == 2){
-            signUp();
+        while(true) {
+            printFirstMeno();
+            System.out.print("-->");
+            int number = scanner.nextInt();
+            if (number == 1) {
+                signIn();
+            } else if (number == 2) {
+                signUp();
+            }
         }
     }
     public static void signUp(){
