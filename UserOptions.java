@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class User {
+public class UserOptions {
     static Scanner scanner = new Scanner(System.in);
     public static void printUserMeno(){
         System.out.println("::::::::::::::::::::::::::::::::::::::::\n" +
@@ -13,26 +13,33 @@ public class User {
                 "    <4> Ticket cancelation\n" +
                 "    <5> Booked tickets\n" +
                 "    <6> Add charge\n" +
-                "    <0> Sign out");
+                "    <0> Sign out\n"+
+                "-->");
     }
     public static void UserMeno(){
         int number;
-        number = scanner.nextInt();
-        switch (number){
-            case 1 :
-                changePassword();
-            case 2 :
-                //
-            case 3 :
-                //
-            case 4 :
-                //
-            case 5 :
-                //
-            case 6 :
-                //
-            case 0 :
-                //
+        while (true) {
+            printUserMeno();
+            number = scanner.nextInt();
+            switch (number) {
+                case 1: {
+                    changePassword();
+                    break;
+                }
+                case 2:
+                    //
+                case 3:
+                    //
+                case 4:
+                    //
+                case 5:
+                    //
+                case 6:
+                    //
+                case 0:
+                    FirstMeno.gettingFirstNumber();
+            }
+            continue;
         }
     }
     public static void changePassword(){
@@ -41,7 +48,7 @@ public class User {
             String newPassword = scanner.next();
             System.out.print("Confirm new password-->");
             String cNewPassword = scanner.next();
-            if (newPassword == cNewPassword){
+            if (newPassword.equals(cNewPassword)){
                 FirstMeno.password[FirstMeno.userNumber] = newPassword;
                 System.out.println("The password was changed!");
             }

@@ -7,6 +7,7 @@ public class FirstMeno {
     static String Password = "pouramini";
     static int counter = 0;
     static Scanner scanner = new Scanner(System.in);
+    static int userNumber;
     public static void printFirstMeno() {
         System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n" +
                 "           WELCOME TO AI RELINE RESERVATION SYSTEM\n" +
@@ -14,10 +15,10 @@ public class FirstMeno {
                 "..........................MENU OPTIONS........................\n" +
                 "\n" +
                 "    <1> Sign in\n" +
-                "    <2> Sign up\n" +
-                "    <3> Exit");
+                "    <2> Sign up");
     }
     public static void gettingFirstNumber(){
+        printFirstMeno();
         System.out.print("-->");
         int number = scanner.nextInt();
         if (number == 1){
@@ -25,9 +26,6 @@ public class FirstMeno {
         }
         else if (number == 2){
             signUp();
-        }
-        else {
-            return;
         }
     }
     public static void signUp(){
@@ -69,13 +67,11 @@ public class FirstMeno {
             System.out.print("Password-->");
             String ps = scanner.next();
             if (checkSignIn(us,ps)) {
-                System.out.println("/");
+                UserOptions.UserMeno();
             } else if (us.equals("Admin") && ps.equals("Admin") || us.equals("admin") && ps.equals("admin")) {
                 System.out.println("Admin");
                 break;
             } else {
-                System.out.println(user[0]);
-                System.out.println(password[0]);
                 System.out.println("Try again...!");
                 continue;
             }
@@ -85,6 +81,7 @@ public class FirstMeno {
         boolean count=false;
         for (int i=0;i<10;i++){
             if (user[i].equals(us) && password[i].equals(ps)){
+                userNumber = i;
                 count=true;
                 break;
             }
