@@ -16,9 +16,11 @@ public class UserOptions {
     static int available_Seats[] = {51, 245, 12};
     static int user_Seats[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     static String user_FlightId[] = {"none", "none", "none", "none", "none", "none", "none", "none", "none", "none"};
+    static String[][] user_Tickets = new String[3][5];
+    static int[] number_Tickets = {0,0,0,0,0,0,0,0,0,0};
 
     public static void printUserMeno() {
-        System.out.println("::::::::::::::::::::::::::::::::::::::::\n" +
+        System.out.print("::::::::::::::::::::::::::::::::::::::::\n" +
                 "         PASSENGER MENU OPTIONS\n" +
                 "::::::::::::::::::::::::::::::::::::::::\n" +
                 " ......................................\n" +
@@ -42,16 +44,20 @@ public class UserOptions {
                     changePassword();
                     break;
                 }
-                case 2:
-                    //
+                case 2: {
+                    search_Flight_Tickets();
+                    break;
+                }
                 case 3: {
                     bookingTicket();
                     break;
                 }
                 case 4:
                     //
-                case 5:
-                    //
+                case 5: {
+                    boockedTickets();
+                    break;
+                }
                 case 6: {
                     addCharge();
                     break;
@@ -95,14 +101,15 @@ public class UserOptions {
                     "...................................................................................\n" +
                     "1) \t |WX-12 \t |Yazd \t |Tehran \t |1401-12-10 \t |12:30 \t |700,000" + '\t' + "|" + available_Seats[0] + '\n' +
                     "...................................................................................\n" +
-                    "1) \t |WX-15 \t |Mashhad \t |Ahvaz \t |1401-12-11 \t |08:00 \t |900,000" + '\t' + "|" + available_Seats[1] + '\n' +
+                    "2) \t |WX-15 \t |Mashhad \t |Ahvaz \t |1401-12-11 \t |08:00 \t |900,000" + '\t' + "|" + available_Seats[1] + '\n' +
                     "...................................................................................\n" +
-                    "1) \t |BG-22 \t |Shiraz \t |Tabriz \t |1401-12-12 \t |22:30 \t |1,100,000" + '\t' + "|" + available_Seats[2] + '\n' +
+                    "3) \t |BG-22 \t |Shiraz \t |Tabriz \t |1401-12-12 \t |22:30 \t |1,100,000" + '\t' + "|" + available_Seats[2] + '\n' +
                     "...................................................................................");
             System.out.print("The desired option-->");
             number = scanner.nextInt();
             if (number == 1) {
-                if (charge[FirstMeno.userNumber] >= 700_000 && available_Seats[0] > 0) {
+                if (charge[FirstMeno.userNumber] >= 700_000 && available_Seats[0] > 0 &&
+                    number_Tickets[FirstMeno.userNumber] < 3) {
                     user_FlightId[FirstMeno.userNumber] = "WX-12";
                     user_Origin[FirstMeno.userNumber] = "Yazd";
                     user_Destination[FirstMeno.userNumber] = "Tehran";
@@ -112,13 +119,16 @@ public class UserOptions {
                     user_Price[FirstMeno.userNumber] = 700_000;
                     available_Seats[0] -= 1;
                     System.out.println("reserved!");
+                    saveTickets();
+                    number_Tickets[FirstMeno.userNumber]++;
                     break;
                 } else {
                     System.out.println("Try again...!");
                     break;
                 }
             } else if (number == 2) {
-                if (charge[FirstMeno.userNumber] >= 900_000 && available_Seats[1] > 0) {
+                if (charge[FirstMeno.userNumber] >= 900_000 && available_Seats[1] > 0 &&
+                    number_Tickets[FirstMeno.userNumber] < 3) {
                     user_FlightId[FirstMeno.userNumber] = "WX-15";
                     user_Origin[FirstMeno.userNumber] = "Mashhad";
                     user_Destination[FirstMeno.userNumber] = "Ahvaz";
@@ -128,13 +138,16 @@ public class UserOptions {
                     user_Price[FirstMeno.userNumber] = 900_000;
                     available_Seats[1] -= 1;
                     System.out.println("reserved!");
+                    saveTickets();
+                    number_Tickets[FirstMeno.userNumber]++;
                     break;
                 } else {
                     System.out.println("Try again...!");
                     continue;
                 }
             } else if (number == 3) {
-                if (charge[FirstMeno.userNumber] >= 1_100_000 && available_Seats[2] > 0) {
+                if (charge[FirstMeno.userNumber] >= 1_100_000 && available_Seats[2] > 0 &&
+                    number_Tickets[FirstMeno.userNumber] < 3) {
                     user_FlightId[FirstMeno.userNumber] = "BG-22";
                     user_Origin[FirstMeno.userNumber] = "Shiraz";
                     user_Destination[FirstMeno.userNumber] = "Tabriz";
@@ -144,6 +157,8 @@ public class UserOptions {
                     user_Price[FirstMeno.userNumber] = 1_100_000;
                     available_Seats[2] -= 1;
                     System.out.println("reserved!");
+                    saveTickets();
+                    number_Tickets[FirstMeno.userNumber]++;
                     break;
                 } else {
                     System.out.println("Try again...!");
@@ -151,5 +166,42 @@ public class UserOptions {
                 }
             }
         }
+    }
+    public static void boockedTickets(){
+        for (int i = 0; i < number_Tickets[FirstMeno.userNumber]; i++) {
+            for (int j = 0; j < 5; j++) {
+                System.out.print(user_Tickets[i][j]+'\t');
+            }
+            System.out.println('\n');
+            if (i-1 < number_Tickets[FirstMeno.userNumber])
+                System.out.print(".................................................................\n");
+        }
+    }
+    public static void saveTickets(){
+                user_Tickets[number_Tickets[FirstMeno.userNumber]][0] = user_FlightId[FirstMeno.userNumber];
+                user_Tickets[number_Tickets[FirstMeno.userNumber]][1] = user_Origin[FirstMeno.userNumber];
+                user_Tickets[number_Tickets[FirstMeno.userNumber]][2] = user_Destination[FirstMeno.userNumber];
+                user_Tickets[number_Tickets[FirstMeno.userNumber]][3] = user_Date[FirstMeno.userNumber];
+                user_Tickets[number_Tickets[FirstMeno.userNumber]][4] = user_Time[FirstMeno.userNumber];
+    }
+    public static void search_Flight_Tickets(){
+        System.out.print("Your FlightId-->");
+        String letter = scanner.next();
+        if (number_Tickets[FirstMeno.userNumber] > 0) {
+            for (int i = 0; i < 3; i++) {
+                if (user_Tickets[i][0].equals(letter)){
+                    for (int j = 0; j < 5; j++) {
+                        System.out.print(user_Tickets[i][j]+'\t');
+                    }
+                }
+                else
+                    System.out.println("Ticket not found");
+                System.out.println('\n');
+                break;
+            }
+        }
+        else
+            System.out.println("No tickets have been booked!");
+
     }
 }
