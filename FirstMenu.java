@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class FirstMeno {
+public class FirstMenu {
     static String[] user = {"aa","bb","cc","dd","ee","ff","gg","hh","ii","kk"};
     static String password[] = {"ll","nn","oo","pp","qq","rr","ss","tt","uu","vv"};
     static String User = "milad";
@@ -10,8 +10,8 @@ public class FirstMeno {
     static int userNumber;
 
     //----------------------------------------------------------------------------------------------------------------//
-    //تابع چاپ منوی اولیه
-    public static void printFirstMeno() {
+    //Primary menu printing function
+    public static void printFirstMenu() {
         System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n" +
                 "           WELCOME TO AI RELINE RESERVATION SYSTEM\n" +
                 "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n" +
@@ -21,10 +21,10 @@ public class FirstMeno {
                 "    <2> Sign up");
     }
     //----------------------------------------------------------------------------------------------------------------//
-    //تابع انتخاب کاربر بین ثبت نام و ورود
+    //User selection function between registration and login
     public static void gettingFirstNumber(){
         while(true) {
-            printFirstMeno();
+            printFirstMenu();
             System.out.print("-->");
             int number = scanner.nextInt();
             if (number == 1) {
@@ -35,7 +35,7 @@ public class FirstMeno {
         }
     }
     //----------------------------------------------------------------------------------------------------------------//
-    //تابع ثبت نام
+    //Registration function
     public static void signUp(){
         boolean check;
         while(true) {
@@ -55,7 +55,7 @@ public class FirstMeno {
         }
     }
     //----------------------------------------------------------------------------------------------------------------//
-    //تابع بررسی نام کاربری تکراری
+    //Duplicate username check function
     public static boolean checkUser()
     {
         boolean count=true;
@@ -70,7 +70,7 @@ public class FirstMeno {
         return count;
     }
     //----------------------------------------------------------------------------------------------------------------//
-    //تابع ورود
+    //Login function
     public static void signIn(){
         String check="Admin";
         while (true) {
@@ -79,7 +79,7 @@ public class FirstMeno {
             System.out.print("Password-->");
             String ps = scanner.next();
             if (checkSignIn(us,ps)) {
-                UserOptions.UserMeno();
+                UserOptions.UserMenu();
             } else if (us.equals("Admin") && ps.equals("Admin") || us.equals("admin") && ps.equals("admin")) {
                 Admin.adminOptions();
                 break;
@@ -90,7 +90,7 @@ public class FirstMeno {
         }
     }
     //----------------------------------------------------------------------------------------------------------------//
-    //تابع بررسی نام کابری و رمز
+    //Username and password checking function
     public static boolean checkSignIn(String us,String ps){
         boolean count=false;
         for (int i=0;i<10;i++){

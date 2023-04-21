@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Admin {
     static Scanner scanner = new Scanner(System.in);
-    public static void printAdminMeno(){
+    public static void printAdminMenu(){
         System.out.println("::::::::::::::::::::::::::::::::::::::::\n" +
                 "           Admin MENUE OPTIONS\n" +
                 "::::::::::::::::::::::::::::::::::::::::\n" +
@@ -14,11 +14,11 @@ public class Admin {
                 "    <0> Sign out");
     }
     public static void adminOptions(){
-        printAdminMeno();
+        printAdminMenu();
         int number = scanner.nextInt();
         switch (number){
             case 0:{
-                FirstMeno.gettingFirstNumber();
+                FirstMenu.gettingFirstNumber();
                 break;
             }
             case 1:
